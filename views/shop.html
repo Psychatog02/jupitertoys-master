@@ -1,0 +1,11 @@
+<div class="products">
+	    <ul>
+			<li class="product" id="product-{{item.id}}" ng-repeat="item in catalog">
+				<div>
+					<h4 class="product-title">{{item.title}}</h4>
+					<img ng-src="{{item.image}}" width="200" />
+					<p><span class="product-price">{{item.price | currency}}</span> <a class="btn btn-success" ng-click="add(item)">Buy</a></p>
+				</div>
+			</li>
+		</ul>
+</div>

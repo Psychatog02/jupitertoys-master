@@ -1,0 +1,35 @@
+{
+  "executionRoleArn": "arn:aws:iam::773345442268:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/jupitertoys-website",
+          "awslogs-region": "ap-southeast-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "portMappings": [
+        {
+          "hostPort": 8080,
+          "protocol": "tcp",
+          "containerPort": 8080
+        }
+      ],
+      "name": "jupitertoys-website",
+      "image": "773345442268.dkr.ecr.ap-southeast-2.amazonaws.com/jupitertoys/website-service:32",
+      "memoryReservation": 512,
+      "cpu": 0,
+      "essential": true
+    }
+  ],
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "cpu": "256",
+  "memory": "512",
+  "family": "jupitertoys-td",
+  "networkMode": "awsvpc",
+  "taskRoleArn": "arn:aws:iam::773345442268:role/ecsTaskExecutionRole"
+}

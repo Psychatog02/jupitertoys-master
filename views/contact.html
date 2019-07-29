@@ -1,0 +1,62 @@
+<div ui-if="contactValidSubmit">
+	<div class="alert alert-success">
+		<strong>Thanks {{forenameSubmit}}</strong>, we appreciate your feedback.
+	</div>
+	<a class="btn" ng-click="goBack()">&laquo; Back</a>		
+</div>
+<div ui-if="!contactValidSubmit">
+	<div id="header-message" >
+		<div class="alert alert-info" ui-if="!(form.$dirty && form.$invalid)">
+			<strong>We welcome your feedback</strong> - tell it how it is.
+		</div>
+		<div class="alert alert-error" ui-if="form.$dirty && form.$invalid">
+			<strong>We welcome your feedback</strong> - but we won't get it unless you complete the form correctly.
+		</div>
+	</div>
+
+	<form class="form-horizontal well" name="form" ng-model="formModel" novalidate="novalidate">
+		<fieldset>
+			<div class="control-group" ng-class="{'error' : form.forename.$dirty && form.forename.$invalid}">
+				<label class="control-label" for="forename">Forename <span class="req">*</span></label>
+				<div class="controls">
+					<input type="text" id="forename" name="forename" placeholder="John" ng-model="forename"  ui-event="{'blur' : 'onBlur(form.forename, form)', 'focus' : 'contactforenameRequired = true'}" ng-required="contactforenameRequired"/>
+					<span class="help-inline" ui-if="form.forename.$dirty && form.forename.$error.required" id="forename-err">Forename is required</span>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="surname">Surname</label>
+				<div class="controls">
+					<input type="text" id="surname" name="surname" placeholder="Example" />
+				</div>
+			</div>
+			<div id="email-group" class="control-group" ng-class="{'error' : form.email.$dirty && form.email.$invalid}">
+				<label class="control-label" for="email">Email <span class="req">*</span></label>
+				<div class="controls">
+					<input type="email" id="email" name="email" placeholder="john.example@planit.net.au" ng-model="email"  ui-event="{'blur' : 'onBlur(form.email, form)', 'focus' : 'contactemailRequired = true'}" ng-required="contactemailRequired"/>
+					<span class="help-inline" ui-if="form.email.$dirty && form.email.$error.required" id="email-err">Email is required</span>
+					<span class="help-inline" ui-if="form.email.$dirty && form.email.$error.email" id="email-err">Please enter a valid email</span>
+					<span class="help-block">Your email address will only be used in reply to this message.</span>
+					<span class="help-block">We <strong>never</strong> send spam email or give your email address to others.</span>
+				</div>
+			</div>
+			<div id="telephone-group" class="control-group" ng-class="{'error' : form.telephone.$dirty && form.telephone.$invalid}">
+				<label class="control-label" for="telephone">Telephone</label>
+				<div class="controls">
+					<input type="tel" id="telephone" name="telephone" placeholder="02 1234 5678" ng-model="telephone" tel ui-event="{'blur' : 'onBlur(form.telephone, form)'}"/>
+					<span class="help-inline" ui-if="form.telephone.$dirty && form.telephone.$invalid" id="telephone-err">Please enter a valid telephone number</span>
+					<span class="help-block">Only provide your telephone number <em>if</em> you want us to contact you this way.</span>
+				</div>
+			</div>
+			<div id="message-group" class="control-group" ng-class="{'error' : form.message.$dirty && form.message.$invalid}">
+				<label class="control-label" for="message">Message <span class="req">*</span></label>
+				<div class="controls">
+					<textarea rows=5 type="text" id="message" name="message" placeholder="Tell us about it.." ng-model="message"  ui-event="{'blur' : 'onBlur(form.message, form)', 'focus' : 'contactmessageRequired = true'}" ng-required="contactmessageRequired"></textarea>
+					<span class="help-inline" ui-if="form.message.$dirty && form.message.$error.required" id="message-err">Message is required</span>
+				</div>
+			</div>
+		</fieldset>
+		<div class="form-actions">
+			<a class="btn-contact btn btn-primary" ui-event="{'click':'onSubmit(form)'}">Submit</a>
+		</div>
+	</form>
+</div>

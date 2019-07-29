@@ -1,0 +1,46 @@
+<div ui-if="cart.getCount() > 0">
+	<p class="cart-msg">There <span ui-if="cart.getCount() != 1">are</span><span ui-if="cart.getCount() == 1">is</span> <span class="cart-count">{{cart.getCount()}}</span> <span ui-if="cart.getCount() != 1">items</span><span ui-if="cart.getCount() == 1">item</span> in your cart, you can <a href="JavaScript:;" ui-if="form.$invalid">Checkout</a> <a href="#/checkout/" ui-if="form.$valid">Checkout</a> or carry on <a href="#/shop/">Shopping</a>.</p>
+	<form name="form" novalidate >
+	<table class="table table-striped cart-items">
+		<thead>
+			<tr>
+				<th>Item</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Subtotal</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tr ng-repeat="item in cart.items()" class="cart-item">
+			<td><img ng-src="{{item.item.image}}" width="50"/> {{item.item.title}}</td>
+			<td>{{item.item.price | currency}}</td>
+			<td>
+				<input class="input-mini" type="number" min="1" maxlength="1" value="{{item.count}}" ng-model="item.count" name="quantity" cartcount \>
+			</td>
+			<td>{{item.item.price * item.count | currency}}</td>
+			<td>
+				<ng-confirm title="Remove Item" action-text="Are you sure that you want to remove <strong>{{item.item.title}}</strong> from your cart?" action-button-text="Yes" action-function="removeItem(item)" cancel-button-text="No" cancel-function="cancel()">
+					<a class="remove-item btn btn-mini btn-danger"><i class="icon-remove icon-white"></i></a>
+				</ng-confirm>
+			</td>
+		</tr>
+		<tfoot>
+			<tr>
+				<td colspan="5"><strong class="total">Total: {{cart.getTotal()}}</strong></td>
+			</tr>
+			<tr>
+				<td colspan="5"><a class="btn-checkout btn btn-success " href="#/checkout" ui-if="!form.$invalid">Check Out</a><a class="btn-checkout btn btn-success disabled" href="" ui-if="form.$invalid">Check Out</a> <ng-confirm title="Empty Cart" action-text="Are you sure that you want to empty your cart?" action-button-text="Yes" action-function="empty()" cancel-button-text="No" cancel-function="cancel()">
+					<a class="btn btn-danger" href="" ui-if="cart.getCount() > 0">Empty Cart</a>
+				</ng-confirm></td>
+			</tr>
+		</tfoot>
+	</table>
+	</form>
+</div>
+<div ui-if="cart.getCount() == 0">
+	<div class="alert">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<strong>Your cart is empty</strong> - there's nothing to see here.
+	</div>
+	<p class><a class="btn btn-success " href="#/shop">Start Shopping &raquo;</a></p>
+</div>

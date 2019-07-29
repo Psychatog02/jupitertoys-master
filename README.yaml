@@ -1,0 +1,49 @@
+---
+name: jupitertoys
+
+logo: docs/logo.jpg
+
+repo: research/jupitertoys
+
+description: |-
+  Welcome to Jupiter Toys, a magical world for good girls and boys.
+
+screenshots: |-
+  ![make-docker-build](docs/screenshots/make-docker-build.gif)
+  |:--:|
+  | * How to build the project using `Maker` and `Docker` * |
+
+  ![make-docker-build](docs/screenshots/how-to-run.gif)
+  |:--:|
+  | * How to run the project using `Maker` and `Docker` * |
+  
+  ![make-docker-build](docs/screenshots/how-to-clean.gif)
+  |:--:|
+  | * How to stop and clean the project using `Maker` and `Docker` * |
+  
+
+usage: |-
+  ### How Continuous Integrationg and Delivery works?
+  ![continuous-integration-delivery](docs/collateral/continuous-integration-and-delivery-v0.1.png)
+
+  ### How to build the project using `Maker` and `Docker`
+  ```
+  make docker/build
+  ```
+
+  ### How to run the project using `Maker` and `Docker`
+  ```
+  make docker/run/jupitertoys
+  ```
+
+  Jupiter Toys will be available at [http://localhost:49160](http://localhost:49160/index.html#/home)
+
+  ### How to stop the Docker container
+  ```
+  make docker/stop/jupitertoys
+  ```
+
+  ### How to stop and remove the Docker container and image
+  ```
+  make docker/clean/jupitertoys
+  ```
